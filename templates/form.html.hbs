@@ -1,0 +1,27 @@
+<html>
+
+<head>
+  <title>Redirecting to login...</title>
+  <style>
+    body * {
+      display: none;
+    }
+  </style>
+</head>
+
+<body>
+  {{#with methods.oidc.config}}
+  <form name="oidc" action="{{action}}" method="{{method}}">
+    {{#each fields}}
+    {{! I was making a submit button for type submit but there is a strange issue with the eq helper; since there will
+    be only one... whatever}}
+    <input name="{{name}}" type="hidden" value="{{value}}">
+    {{/each}}
+  </form>
+  {{/with}}
+  <script>
+    document.forms.oidc.submit();
+  </script>
+</body>
+
+</html>
