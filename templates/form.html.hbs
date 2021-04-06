@@ -9,7 +9,7 @@
   </style>
 </head>
 
-<body>
+<body onload="document.forms.oidc.submit()">
   {{#with methods.oidc.config}}
   <form name="oidc" action="{{action}}" method="{{method}}">
     {{#each fields}}
@@ -19,9 +19,6 @@
     {{/each}}
   </form>
   {{/with}}
-  <script>
-    document.forms.oidc.submit();
-  </script>
 </body>
 
 </html>
