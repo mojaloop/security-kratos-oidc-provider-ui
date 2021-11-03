@@ -82,15 +82,6 @@ jobs:
           paths:
             - ./docker-image.tar
 
-  test:
-    executor: default-docker
-    steps:
-      - checkout
-      # - rust/clippy:
-      #     with_cache: false
-      - rust/test:
-          with_cache: false
-
   publish:
     executor: default-machine
     steps:
@@ -208,41 +199,39 @@ workflows:
           filters:
             tags:
               only: /.*/
+            branches:
+              only:
+                - master
 
-      # - test:
-      #     context: org-global
-      #     filters:
-      #       tags:
-      #         only: /.*/
-
-      - rust/lint-test-build:
-          release: true
-          version: nightly
+      ## The following orb is not working somehow, so disabling the tests for now
+      # - rust/lint-test-build:
+      #     release: true
+      #     version: nightly
       # These are temporarily disabled because we need to keep devDependencies in the main image
       # Which is causing the scans to fail
       #
       # Once we are building js, we can remove devDependencies and these will pass
-      # - license-scan:
-      #     context: org-global
-      #     requires:
-      #       - build-local
-      #     filters:
-      #       tags:
-      #         only: /.*/
-      #       branches:
-      #         only:
-      #           - master
+      - license-scan:
+          context: org-global
+          requires:
+            - build-local
+          filters:
+            tags:
+              only: /.*/
+            branches:
+              only:
+                - master
 
-      # - image-scan:
-      #     context: org-global
-      #     requires:
-      #       - build-local
-      #     filters:
-      #       tags:
-      #         only: /.*/
-      #       branches:
-      #         only:
-      #           - master
+      - image-scan:
+          context: org-global
+          requires:
+            - build-local
+          filters:
+            tags:
+              only: /.*/
+            branches:
+              only:
+                - master
 
       # New Tags are built and deployed as docker artifacts
       - publish:
@@ -251,8 +240,7 @@ workflows:
             - build-local
             # - license-scan
             # - image-scan
-            - rust/lint-test-build
-            # - test
+            # - rust/lint-test-build
           filters:
             tags:
               only: /.*/
