@@ -52,7 +52,7 @@ executors:
     working_directory: /home/circleci/project
     docker:
       # - image: cimg/rust:1.49.0
-      - image: rustlang/rust:latest
+      - image: rustlang/rust:nightly
 
   default-machine:
     machine:
