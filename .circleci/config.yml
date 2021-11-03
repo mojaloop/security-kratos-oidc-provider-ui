@@ -238,8 +238,8 @@ workflows:
           context: org-global
           requires:
             - build-local
-            # - license-scan
-            # - image-scan
+            - license-scan
+            - image-scan
             # - rust/lint-test-build
           filters:
             tags:
