@@ -81,6 +81,15 @@ jobs:
           paths:
             - ./docker-image.tar
 
+  test:
+    executor: default-docker
+    steps:
+      - checkout
+      - clippy:
+          with_cache: false
+      - test:
+          with_cache: false
+
   publish:
     executor: default-machine
     steps:
@@ -199,9 +208,7 @@ workflows:
             tags:
               only: /.*/
 
-      - rust/lint-test-build:
-          release: true
-          version: 1.31.0-nightly
+      - test:
           context: org-global
           filters:
             tags:
