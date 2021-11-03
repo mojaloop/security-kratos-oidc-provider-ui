@@ -217,6 +217,7 @@ workflows:
 
       - rust/lint-test-build:
           release: true
+          version: nightly
       # These are temporarily disabled because we need to keep devDependencies in the main image
       # Which is causing the scans to fail
       #
