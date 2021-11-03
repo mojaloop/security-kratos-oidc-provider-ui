@@ -201,6 +201,7 @@ workflows:
 
       - rust/lint-test-build:
           release: true
+          version: 1.31.0-nightly
           context: org-global
           filters:
             tags:
