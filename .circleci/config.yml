@@ -247,7 +247,8 @@ workflows:
             - build-local
             # - license-scan
             # - image-scan
-            - rust/lint-test-build
+            # - rust/lint-test-build
+            - test
           filters:
             tags:
               only: /.*/
