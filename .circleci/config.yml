@@ -85,9 +85,9 @@ jobs:
     executor: default-docker
     steps:
       - checkout
-      - clippy:
+      - rust/clippy:
           with_cache: false
-      - test:
+      - rust/test:
           with_cache: false
 
   publish:
