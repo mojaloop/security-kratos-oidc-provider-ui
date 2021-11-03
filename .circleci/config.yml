@@ -209,12 +209,14 @@ workflows:
             tags:
               only: /.*/
 
-      - test:
-          context: org-global
-          filters:
-            tags:
-              only: /.*/
+      # - test:
+      #     context: org-global
+      #     filters:
+      #       tags:
+      #         only: /.*/
 
+      - rust/lint-test-build:
+          release: true
       # These are temporarily disabled because we need to keep devDependencies in the main image
       # Which is causing the scans to fail
       #
@@ -248,8 +250,8 @@ workflows:
             - build-local
             # - license-scan
             # - image-scan
-            # - rust/lint-test-build
-            - test
+            - rust/lint-test-build
+            # - test
           filters:
             tags:
               only: /.*/
